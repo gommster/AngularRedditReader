@@ -1,0 +1,30 @@
+<div class="reddit-tops-body">
+    <form (submit)="getArticles()">
+        <div class="subreddit-input-wrapper">
+            reddit.com/r/
+            <input 
+                type="text"
+                name="inputSubreddit"
+                placeholder="Enter subreddit url..."
+                class="subreddit-input"
+                [(ngModel)]="inputSubreddit"
+            />/top
+        </div>
+        <input
+            type="submit" 
+            class="subreddit-submit"
+            value="Get Top Articles"
+        />
+    </form>
+    <div class="articles">
+        <div class="article" *ngFor="let article of articles">
+            <div class="ups" *ngIf="article.data.ups > 0">Upvotes: {{article.data.ups}}</div>
+            <div class="downs" *ngIf="article.data.downs > 0">Downvotes: {{article.data.downs}}</div>
+            <img class="thumbnail" *ngIf="article.data.thumbnail_height" src={{article.data.thumbnail}}>
+            <div class="text">
+                <div class="title" (click)="titleClick(article.data.permalink)">{{article.data.title}}</div>
+                <div class="author" (click)="authorClick(article.data.author)">Author: {{article.data.author}}</div>
+            </div>
+        </div>
+    </div>
+</div>
